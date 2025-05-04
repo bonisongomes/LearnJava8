@@ -1,8 +1,11 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
-public class Pred {
+public class FunctionalInterfaceTest {
     public static void main(String[] args) {
 
         Predicate<Integer> isEven = x -> x % 2 == 0;
@@ -26,6 +29,15 @@ public class Pred {
         Predicate<Student> studentPredicate = student -> student.getSid() > 3;
         Student s1 = new Student(4,"DFDF");
         System.out.println(studentPredicate.test(s1));
+
+        Predicate<Integer> predicate = x -> x % 2 == 0;
+        Function<Integer,Integer> function = x -> x * x;
+        Consumer<Integer> consumer = x -> System.out.println("Using Consumer : " + x);
+        Supplier<Integer> supplier = () -> 100;
+
+        if(predicate.test(supplier.get())){
+            consumer.accept(function.apply(supplier.get()));
+        }
     }
 
     public static class Student{
